@@ -1,0 +1,39 @@
+baza = {"ID" : "20",
+        "Прізвище" : "Струтинський",
+        "Ім'я" : "Антон",
+        "Група" : "ІПЗ-23-2",
+        "Курс" : "2",
+        "Борг" : [],
+        "Статистика книг" : []}
+
+for i in baza:
+    choose = int(input("""
+\nВведіть 1 якщо хочете побачити карту користувача,
+Введіть 2 якщо хочете взяти книгу,
+Введіть 3 якщо хочете повернути книгу,
+Введіть 0 якщо хочете вийти 
+"""))
+    
+    if choose == 1:
+        for key, value in baza.items():
+            if key not in ["Борг", "Статистика книг"]:
+                print(f"{key}: {value}")
+    elif choose == 2:
+        book = input("яку книгу бажаєте взяти? ")
+        baza["Борг"].append(book)
+    elif choose == 3:
+        if baza["борг"]:
+            print("Список книг у боргу:")
+            for book in baza["борг"]:
+                print(book)
+            book = input("Введіть назву книги, яку бажаєте повернути: ")
+            if book in baza["борг"]:
+                baza["борг"].remove(book)
+                baza["Статистика книг"].append(book)
+                print(f"Книга '{book}' успішно повернута.")
+            else:
+                print(f"Книги '{book}' немає в боргу.")
+        else:
+            print("немає книг у боргу")
+    elif choose == 0:
+        break
